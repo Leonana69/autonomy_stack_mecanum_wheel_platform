@@ -868,6 +868,7 @@ public:
     nanoflann::KNNResult<DistanceType, IndexType> result(num_closest);
     result.init(out_indices, out_distance_sq);
     this->findNeighbors(result, query_point, nanoflann::SearchParams());
+    return result.size();
   }
 
   size_t radiusSearch(const ElementType *query_point, const DistanceType &radius,

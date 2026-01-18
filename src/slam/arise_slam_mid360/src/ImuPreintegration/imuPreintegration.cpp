@@ -67,7 +67,7 @@ namespace arise_slam {
         tfOdom2BaseLink = std::make_shared<tf2_ros::TransformBroadcaster>(this);
         
         // set relevant parameter
-        std::shared_ptr<gtsam::PreintegrationParams> p = gtsam::PreintegrationParams::MakeSharedU(config_.imuGravity);
+        boost::shared_ptr<gtsam::PreintegrationParams> p = gtsam::PreintegrationParams::MakeSharedU(config_.imuGravity);
         
         // std::shared_ptr<gtsam::PreintegrationParams> p(std::make_shared<gtsam::PreintegrationParams>(config_.imuGravity));
         p->accelerometerCovariance =
@@ -230,7 +230,7 @@ namespace arise_slam {
         Eigen::Vector3d relative_trans;
 
         graphFactors.push_back(
-                std::make_shared<gtsam::BetweenFactor<gtsam::Pose3>>(
+                boost::make_shared<gtsam::BetweenFactor<gtsam::Pose3>>(
                         gtsam::Symbol('x', from_id),
                         gtsam::Symbol('x', to_id),
                         gtsam::Pose3(gtsam::Rot3(relative_motion.setIdentity()),
@@ -247,7 +247,7 @@ namespace arise_slam {
     void imuPreintegration::addZeroVelocityPrior(const FrameId &frame_id) {
         // VLOG(10) << "No motion detected, adding zero velocity prior.";
         graphFactors.push_back(
-                std::make_shared<gtsam::PriorFactor<gtsam::Vector3>>(
+                boost::make_shared<gtsam::PriorFactor<gtsam::Vector3>>(
                         gtsam::Symbol('v', frame_id),
                         gtsam::Vector3::Zero(),
                         noVelocityNoise));
