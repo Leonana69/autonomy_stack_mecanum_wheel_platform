@@ -26,7 +26,7 @@ void DepthKeypointExtractor::uniformfeatureExtraction(const pcl::PointCloud<pcl:
 void DepthKeypointExtractor::uniformfeatureExtraction(const pcl::PointCloud<point_os::PointcloudXYZITR>::Ptr &pc_in, 
 pcl::PointCloud<pcl::PointXYZI>::Ptr &pc_out_surf, int skip_num, float block_range)
     {   
-        for (uint i=1; i <(int)pc_in->points.size(); i+=skip_num)
+        for (uint i=1; i <(uint)pc_in->points.size(); i+=skip_num)
         {   
             pcl::PointXYZI point;
             point.x=pc_in->points[i].x;
